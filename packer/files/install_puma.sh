@@ -1,9 +1,22 @@
 #!/bin/bash
+set -e
 
-cd ~
+cd /home/appuser
 
 git clone -b monolith https://github.com/express42/reddit.git
 
-cd reddit && bundle install
+cd /home/appuser/reddit && bundle install
 
-puma -d
+echo '[Unit]
+Description=Puma-server
+
+[Service]
+ExecStart=/usr/local/bin/puma -d --dir /home/appuser/reddit
+
+[Install]
+WantedBy=multi-user.target
+' > /etc/systemd/system/rd-puma.service
+
+chmod 664 /etc/systemd/system/rd-puma.service
+
+systemctl daemon-reload
