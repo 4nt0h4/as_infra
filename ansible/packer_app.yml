@@ -1,0 +1,10 @@
+- name: Packer App
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Apt install ruby
+      apt:
+        name: ['ruby-full', 'ruby-bundler', 'build-essential']
+        state: present
+        update-cache: yes

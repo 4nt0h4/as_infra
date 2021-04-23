@@ -22,18 +22,18 @@ resource "google_compute_instance" "app" {
     appuser2:${file(var.public_key_path)}
     EOF
   }
-  provisioner "file" {
-    source      = "../modules/app/files/puma.service"
-    destination = "/tmp/puma.service"
+  # provisioner "file" {
+  #   source      = "../modules/app/files/puma.service"
+  #   destination = "/tmp/puma.service"
 
-    connection {
-      type        = "ssh"
-      user        = "appuser"
-      agent       = false
-      private_key = file(var.private_key_path)
-      host        = google_compute_instance.app.network_interface.0.access_config.0.nat_ip
-    }
-  }
+  #   connection {
+  #     type        = "ssh"
+  #     user        = "appuser"
+  #     agent       = false
+  #     private_key = file(var.private_key_path)
+  #     host        = google_compute_instance.app.network_interface.0.access_config.0.nat_ip
+  #   }
+  # }
   # provisioner "remote-exec" {
   #   script = "../modules/app/files/deploy.sh"
 
