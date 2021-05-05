@@ -1,0 +1,4 @@
+db_host: 10.166.0.60
+jd_nginx_listen_port: 80
+jd_nginx_server_name: reddit
+jd_nginx_app_location: http://127.0.0.1:9292
